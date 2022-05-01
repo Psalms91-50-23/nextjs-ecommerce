@@ -1,97 +1,163 @@
 import React, { useState } from 'react';
 import { client, urlFor } from '../../lib/client';
-import { AiOutlineMinus, AiOutlinePlus, AiFillStar, AiOutlineStar } from 'react-icons/ai';
+import { AiOutlineMinus, AiOutlinePlus, AiFillStar, AiOutlineStar, AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
+// import Product from '../../components/Product';
+import ProductSlider from '../../components/ProductSlider';
 
 const ProductDetails = ({ product: { image, name, details, price }, products, bannerData }) => {
     const { discount } = bannerData[0];
     const discountNum = 1-(Number(discount.slice(0,2)/100));
     const [hover, setHover] = useState(false);
-    const [imageIndex, setImageIndex] = useState(0)
+    const [imageIndex, setImageIndex] = useState(0);
+    const [qty, setQty] = useState(0)
+
+    const nextImage = () => {
+        if(imageIndex < image.length-1){
+            setImageIndex(imageIndex+1)
+        }else if (imageIndex === image.length-1){
+            setImageIndex(0)
+        }
+    }
+
+    const previousImage = () => {
+        if(imageIndex > 0 ){
+            setImageIndex(imageIndex-1)
+        }else if (imageIndex === 0){
+            setImageIndex(image.length-1)
+        }
+    }
+
+ 
   return (
-    <div>
+    // <div>
         <div className="product-detail-container">
             <div>
-                <div className="product-image-container">
-                    <div className="image-container">
-                        <div 
-                            className={hover ? "product-details-hover" : "product-details-notHover"}
+                <div className="product-details-imageContainer">
+                    <div className="product-image-container">
+                        <div className="image-container">
+                            <div 
+                                className={hover ? "product-details-hover" 
+                                : "product-details-notHover"}
                             >
-                            <p>{discount.slice(0,4)}</p>
-                            <p className={hover ? "off-hover" : "off-not-hover"}>Off</p>
-                        </div>
-                        <img 
-                            className="product-detail-image"
-                            src={urlFor(image && image[imageIndex])} 
-                            alt={name}
-                            onMouseEnter={() => setHover(true)}
-                            onMouseLeave={() => setHover(false)}
-                        >
-                        </img>
-                    </div>
-                <div 
-                    className="small-images-container"
-                    >
-                    {image.map((item,index) => (
-                        <img 
-                            src={urlFor(item)} 
-                            className={"small-image"}
-                            onMouseEnter={() => setImageIndex(index)}
-                            // onClick={""}
-                            key={index}
-                        />
-                    ))}
-                </div>
-                </div>
-                <div className="product-details-desc">
-                    <h1>{name}</h1>
-                    <div className="reviews">
-                        <div className="stars-container">
-                            <AiFillStar />
-                            <AiFillStar />
-                            <AiFillStar />
-                            <AiFillStar />
-                            <AiOutlineStar />
-                        </div>
-                        <p>(20)</p>
-                    </div>
-                    <h4>Details :</h4>
-                    <p>{details}</p>
-                    <div className="price-container">
-                        <p className="product-price">$ {(price).toFixed(2)}</p>
-                        <p className="product-discounted-price">$ {(price*discountNum).toFixed(2)}</p>
-                    </div>
-                    <div className="quantity">
-                        <h3>Quantity</h3>
-                        <div className="quantity-desc">
-                            <span className="minus">
-                                <AiOutlineMinus />
-                            </span>
-                            <span className="num">{0}</span>
-                            <span className="plus">
-                                <AiOutlinePlus />
-                            </span>
-                        </div>
-                        <div className="buttons">
-                            <button 
-                                type="buttons"
-                                className="add-to-cart"
-                                // onClick={""}
+                                <p>{discount.slice(0,4)}</p>
+                                <p className={hover ? "off-hover" : "off-not-hover"}>Off</p>
+                            </div>
+                            <div className="image-button-container">
+                                <img 
+                                    className="product-detail-image"
+                                    src={urlFor(image && image[imageIndex])} 
+                                    alt={name}
+                                    onMouseEnter={() => setHover(true)}
+                                    onMouseLeave={() => setHover(false)}
+                                />
+                                <span 
+                                    className="left-arrow"
+                                    onClick={previousImage}
                                 >
-                                    Add to Cart
-                            </button>
-                            <button 
-                                type="buttons"
-                                className="buy-now"
-                                // onClick={""}
+                                    <AiOutlineLeft size={30}/>
+                                </span>
+                                <span 
+                                    className="right-arrow"
+                                    onClick={nextImage}
                                 >
-                                    Buy Now
-                            </button>
+                                    <AiOutlineRight size={30}/>
+                                </span>
+                            </div>
+                        </div>
+                    <div className="small-images-container">
+                        {image.map((item,index) => (
+
+                            <img 
+                                src={urlFor(item)} 
+                                // id={`small-image_${index}`}
+                                className={imageIndex === index ? "small-image selected-image" : "small-image"}
+                                onMouseEnter={(e) => setImageIndex(index)}
+                                // onClick={""}
+                                key={index}
+                            />
+                        ))}
+                    </div>
+                    </div>
+                    <div className="product-details-desc">
+                        <h1>{name}</h1>
+                        <div className="reviews">
+                            <div className="stars-container">
+                                <AiFillStar />
+                                <AiFillStar />
+                                <AiFillStar />
+                                <AiFillStar />
+                                <AiOutlineStar />
+                            </div>
+                            <p>(20)</p>
+                        </div>
+                        <h4>Details :</h4>
+                        <p>{details}</p>
+                        <div className="price-container">
+                            <p className="product-price">$ {(price).toFixed(2)}</p>
+                            <p className="product-discounted-price">$ {(price*discountNum).toFixed(2)}</p>
+                        </div>
+                        <div className="quantity">
+                            <div className="quantity-container">
+                                <h4>Quantity</h4>
+                                <div className="quantity-desc">
+                                    <span 
+                                        className="minus"
+                                        onClick={() => {
+                                            if(qty > 0){
+                                                setQty(qty-1)
+                                            }
+                                        }}
+                                    >
+                                        <AiOutlineMinus />
+                                    </span>
+                                    <span className="num">{qty}</span>
+                                    <span 
+                                        className="plus"
+                                        onClick={() => setQty(qty+1)}
+                                    >
+                                        <AiOutlinePlus />
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="buttons">
+                                <button 
+                                    type="buttons"
+                                    className="add-to-cart"
+                                    // onClick={""}
+                                    >
+                                        Add to Cart
+                                </button>
+                                <button 
+                                    type="buttons"
+                                    className="buy-now"
+                                    // onClick={""}
+                                    >
+                                        Buy Now
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="maylike-products-wrapper">
+                    <h2>You may also like</h2>
+                    <div className="marquee">
+                        <div className="maylike-products-container track">
+                        {products?.map((product) => {
+                            console.log({product});
+                            return (
+                            <ProductSlider 
+                                key={product._id} 
+                                product={product} 
+                                discount={discount}
+                            />)
+                        })
+                        }
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    /* </div> */
   )
 }
 

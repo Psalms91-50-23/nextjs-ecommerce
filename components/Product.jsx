@@ -2,28 +2,25 @@ import React from 'react';
 import Link from 'next/link';
 import { urlFor } from '../lib/client';
 
-import ZoomMe from './ZoomMe';
-
 const Product = ({ 
   product: { image, name, price, slug }, discount}) => {
     const discountNum = 1-(Number(discount.slice(0,2)/100));
   return (
-    // <div>
+    // <div >
       <Link href={`/product/${slug.current}`}>
       <div className="product-card">
         <div className="sale-discount-container">
           <p>{discount.slice(0,4)}</p>
           <p className="off">Off</p>
         </div>
-        <ZoomMe imgUrl={image && image[0]} name={name}/>
-          {/* <img 
+        {/* <ZoomMe imgUrl={image && image[0]} name={name}/> */}
+          <img 
             className="product-image"
             src={urlFor(image && image[0])} 
             alt={name} 
             width={250}
             height={250}
-          /> */}
-
+          />
           <p className="product-name">{name}</p>
           <div className="price-container">
             <p className="product-price">$ {(price).toFixed(2)}</p>
