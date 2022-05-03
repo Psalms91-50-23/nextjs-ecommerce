@@ -4,68 +4,39 @@ import { AiOutlineSearch } from 'react-icons/ai';
 
 const Products = ({ products, bannerData }) => {
 
-    // const [originalProductsData, setOriginalProductsData] = useState(products);
-    // const [filteredField, setFilteredField] = useState({ name: "", categoryField: "all"});
-    // const { name, categoryField } = filteredField;
     const [filteredProducts, setFilteredProducts] = useState(products);
-    const [category, setCategory] = useState("all")
+    const [options, setOptions] = useState("all")
     const [name, setName] = useState("")
 
     useEffect(() => {
-        // console.log({products});
-        console.log({name});
-        console.log({category});
-        
-        console.log("-1");
-        if(name && category === "all"){
-            console.log("0");
+        if(name && options === "all"){
             const productsFiltered = products.filter((product) => {
-                console.log({product});
                 if(product.name.toLowerCase().includes(name.toLowerCase())){
                     return product;
                 }
             })
             setFilteredProducts(productsFiltered)
-            console.log({productsFiltered});
-            // setFilteredProducts(products);
         }
-        else if(!name && category !== "all"){
-            console.log("2");
+        else if(!name && options !== "all"){
             const productsFiltered = products.filter((product) => {
-                console.log({product});
-                if(product.category.includes(category)){
+                if(product.category.includes(options)){
                     return product;
                 }
             })
-            console.log({productsFiltered});
             setFilteredProducts(productsFiltered)
         }
-        else if(name && category !== "all"){
-            console.log("3");
-            // console.log("name not falsy and field not all");
+        else if(name && options !== "all"){
             const productsFiltered = products.filter((product) => {
-                console.log({product});
-                if(product.name.toLowerCase().includes(name.toLowerCase()) && product.category.includes(category)){
+                if(product.name.toLowerCase().includes(name.toLowerCase()) && product.category.includes(options)){
                     return product;
                 }
             })
-            console.log({productsFiltered});
             setFilteredProducts(productsFiltered)
         }else{
             setFilteredProducts(products)
         }
-    }, [name,category])
+    }, [name,options])
     
-    const handleTextChange = (e) => {
-        e.preventDefault();
-        setName(e.target.value)
-
-    }
-
-    const handleOptionChange = (e) => {
-        e.preventDefault();
-        setCategory(e.target.value)
-    }
   return (
       <>
         <div className="searchbar-container">
@@ -77,8 +48,8 @@ const Products = ({ products, bannerData }) => {
                         name="name"
                         type="text"
                         className="search-input"
-                        autocomplete="off"
-                        onChange={e => handleTextChange(e)}
+                        autoComplete="off"
+                        onChange={e => setName(e.target.value)}
                     />
                     <span className="search-icon-container">
                         <AiOutlineSearch className="search-icon"/>
@@ -88,7 +59,7 @@ const Products = ({ products, bannerData }) => {
                     <select
                         name="categoryField" 
                         className="select"
-                        onChange={e => handleOptionChange(e)}
+                        onChange={e => setOptions(e.target.value)}
                     >
                         <option value="all">All</option>
                         <option value="wireless">Wireless</option>
@@ -97,8 +68,8 @@ const Products = ({ products, bannerData }) => {
                         <option value="gaming">Gaming</option>
                         <option value="music">Music</option>
                         <option value="laptop">Laptop</option>
-                        <option value="desktop">Desktop</option>
                         <option value="audio">Audio</option>
+                        <option value="speaker">Speaker</option>
                         <option value="tablet">Tablet</option>
                     </select>
                 </div>

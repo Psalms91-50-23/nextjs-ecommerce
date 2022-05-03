@@ -18,8 +18,6 @@ const ProductSlider = ({
                     className="slider-image"
                     src={urlFor(image && image[0])} 
                     alt={name} 
-                    // width={100}
-                    // height={100}
                 />
                 <p className="slider-product-name">{name}</p>
                 <div className="slider-price-container">

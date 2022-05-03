@@ -1,15 +1,25 @@
 import React, { useState } from 'react';
 import { client, urlFor } from '../../lib/client';
-import { AiOutlineMinus, AiOutlinePlus, AiFillStar, AiOutlineStar, AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
-// import Product from '../../components/Product';
+import { 
+    AiOutlineMinus, AiOutlinePlus, AiFillStar, 
+    AiOutlineStar, AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
+import { HiShoppingCart } from 'react-icons/hi';
+import { RiHandbagFill } from 'react-icons/ri';
 import ProductSlider from '../../components/ProductSlider';
+import { useStateContext  } from '../../context/StateContext';
 
-const ProductDetails = ({ product: { image, name, details, price }, products, bannerData }) => {
+const ProductDetails = ({ product, products, bannerData }) => {
+    const { image, name, details, price } = product;
     const { discount } = bannerData[0];
     const discountNum = 1-(Number(discount.slice(0,2)/100));
     const [hover, setHover] = useState(false);
     const [imageIndex, setImageIndex] = useState(0);
-    const [qty, setQty] = useState(0)
+    const { 
+        decreaseQty, 
+        increaseQty, 
+        qty, 
+        addProduct,
+        setShowCart } = useStateContext();
 
     const nextImage = () => {
         if(imageIndex < image.length-1){
@@ -27,9 +37,12 @@ const ProductDetails = ({ product: { image, name, details, price }, products, ba
         }
     }
 
- 
+    const handleBuyNow = () => {
+        addProduct(product, qty, discountNum);
+        setShowCart(true)
+    }
+
   return (
-    // <div>
         <div className="product-detail-container">
             <div>
                 <div className="product-details-imageContainer">
@@ -65,14 +78,11 @@ const ProductDetails = ({ product: { image, name, details, price }, products, ba
                             </div>
                         </div>
                     <div className="small-images-container">
-                        {image.map((item,index) => (
-
+                        {image.map((imgUrl,index) => (
                             <img 
-                                src={urlFor(item)} 
-                                // id={`small-image_${index}`}
+                                src={urlFor(imgUrl)} 
                                 className={imageIndex === index ? "small-image selected-image" : "small-image"}
-                                onMouseEnter={(e) => setImageIndex(index)}
-                                // onClick={""}
+                                onMouseEnter={() => setImageIndex(index)}
                                 key={index}
                             />
                         ))}
@@ -93,8 +103,8 @@ const ProductDetails = ({ product: { image, name, details, price }, products, ba
                         <h4>Details :</h4>
                         <p>{details}</p>
                         <div className="price-container">
-                            <p className="product-price">$ {(price).toFixed(2)}</p>
-                            <p className="product-discounted-price">$ {(price*discountNum).toFixed(2)}</p>
+                            <p className="product-price">$ {Number(price.toFixed(2))}</p>
+                            <p className="product-discounted-price">$ {Number((price*discountNum).toFixed(2))}</p>
                         </div>
                         <div className="quantity">
                             <div className="quantity-container">
@@ -102,18 +112,14 @@ const ProductDetails = ({ product: { image, name, details, price }, products, ba
                                 <div className="quantity-desc">
                                     <span 
                                         className="minus"
-                                        onClick={() => {
-                                            if(qty > 0){
-                                                setQty(qty-1)
-                                            }
-                                        }}
+                                        onClick={decreaseQty}
                                     >
                                         <AiOutlineMinus />
                                     </span>
                                     <span className="num">{qty}</span>
                                     <span 
                                         className="plus"
-                                        onClick={() => setQty(qty+1)}
+                                        onClick={increaseQty}
                                     >
                                         <AiOutlinePlus />
                                     </span>
@@ -123,15 +129,22 @@ const ProductDetails = ({ product: { image, name, details, price }, products, ba
                                 <button 
                                     type="buttons"
                                     className="add-to-cart"
-                                    // onClick={""}
-                                    >
-                                        Add to Cart
+                                    onClick={() => addProduct(product, qty, discountNum)}
+                                >
+                                    <span className="shopping-cart-icon">
+                                        <HiShoppingCart />
+                                        {/* <AiOutlineShoppingCart /> */}
+                                    </span>
+                                    Add to Cart
                                 </button>
                                 <button 
                                     type="buttons"
                                     className="buy-now"
-                                    // onClick={""}
-                                    >
+                                    onClick={handleBuyNow}
+                                 >
+                                     <span className="buy-now-icon">
+                                         <RiHandbagFill />
+                                     </span>
                                         Buy Now
                                 </button>
                             </div>
@@ -143,7 +156,6 @@ const ProductDetails = ({ product: { image, name, details, price }, products, ba
                     <div className="marquee">
                         <div className="maylike-products-container track">
                         {products?.map((product) => {
-                            console.log({product});
                             return (
                             <ProductSlider 
                                 key={product._id} 
@@ -157,7 +169,6 @@ const ProductDetails = ({ product: { image, name, details, price }, products, ba
                 </div>
             </div>
         </div>
-    /* </div> */
   )
 }
 

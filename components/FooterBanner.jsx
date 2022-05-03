@@ -12,7 +12,7 @@ const FooterBanner = ({ footerBanner: {
   buttonText, 
   product, 
   desc,
-  image} }) => {
+  image }}) => {
 
   return (
     <div className="footer-banner-container">
@@ -40,7 +40,6 @@ const FooterBanner = ({ footerBanner: {
           </Link>
         </div>
       </div>
-      {/* FooterBanner */}
     </div>
   )
 }

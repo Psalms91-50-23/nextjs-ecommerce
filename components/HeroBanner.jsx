@@ -1,11 +1,9 @@
 import React from 'react'
 import Link from "next/link";
-
 import { urlFor } from '../lib/client';
 
 const HeroBanner = ({ heroBanner, images }) => {
-    // console.log({images});
-    // console.log(imgHalved.src);
+
   return (
     <div className="hero-banner-container">
         <div>
@@ -42,5 +40,4 @@ const HeroBanner = ({ heroBanner, images }) => {
     </div>
   )
 }
-//className="button-desc-container"
 export default HeroBanner
