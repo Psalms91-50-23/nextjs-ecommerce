@@ -33,7 +33,8 @@ a {
 
 .navbar-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  width: 100%;
   margin: 6px 10px 6px 0px;
   position: relative;
 }
@@ -100,8 +101,9 @@ span.text-red {
 
 .logo {
   display: flex;
+  max-width: 1400px;
+  width: 100%;
   justify-content: space-between;
-  align-items: center;
   color: gray;
   font-size: 18px;
   width: 100%;
