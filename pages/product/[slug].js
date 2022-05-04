@@ -14,7 +14,8 @@ const ProductDetails = ({ product, products, bannerData }) => {
     const discountNum = 1-(Number(discount.slice(0,2)/100));
     const [hover, setHover] = useState(false);
     const [imageIndex, setImageIndex] = useState(0);
-    const [sliderProductFiltered, setSliderProductFiltered] = useState(products)
+    const [sliderProductFiltered, setSliderProductFiltered] = useState(products);
+    // const [filter, setFilter] = useState(false);
     const { 
         decreaseQty, 
         increaseQty, 
@@ -159,14 +160,12 @@ const ProductDetails = ({ product, products, bannerData }) => {
                     <div className="marquee">
                         <div className="maylike-products-container track">
                         {sliderProductFiltered?.map((product) => {
-                            if(product.name !== name ){
-                                return (
-                                <ProductSlider 
-                                    key={product._id} 
-                                    product={product} 
-                                    discount={discount}
-                                />)
-                            }
+                            return (
+                            <ProductSlider 
+                                key={product._id} 
+                                product={product} 
+                                discount={discount}
+                            />)
                         })
                         }
                         </div>
