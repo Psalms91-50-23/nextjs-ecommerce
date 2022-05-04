@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { client, urlFor } from '../../lib/client';
 import { 
     AiOutlineMinus, AiOutlinePlus, AiFillStar, 
@@ -14,12 +14,17 @@ const ProductDetails = ({ product, products, bannerData }) => {
     const discountNum = 1-(Number(discount.slice(0,2)/100));
     const [hover, setHover] = useState(false);
     const [imageIndex, setImageIndex] = useState(0);
+    const [sliderProductFiltered, setSliderProductFiltered] = useState(products)
     const { 
         decreaseQty, 
         increaseQty, 
         qty, 
         addProduct,
         setShowCart } = useStateContext();
+
+    useEffect(() => {
+        setSliderProductFiltered(products.filter(item => item.name !== name));
+    },[name])
 
     const nextImage = () => {
         if(imageIndex < image.length-1){
@@ -41,7 +46,6 @@ const ProductDetails = ({ product, products, bannerData }) => {
         addProduct(product, qty, discountNum);
         setShowCart(true)
     }
-
   return (
         <div className="product-detail-container">
             <div>
@@ -154,7 +158,7 @@ const ProductDetails = ({ product, products, bannerData }) => {
                     <h2>You may also like</h2>
                     <div className="marquee">
                         <div className="maylike-products-container track">
-                        {products?.map((product) => {
+                        {sliderProductFiltered?.map((product) => {
                             if(product.name !== name ){
                                 return (
                                 <ProductSlider 
