@@ -133,7 +133,6 @@ const ProductDetails = ({ product, products, bannerData }) => {
                                 >
                                     <span className="shopping-cart-icon">
                                         <HiShoppingCart />
-                                        {/* <AiOutlineShoppingCart /> */}
                                     </span>
                                     Add to Cart
                                 </button>
