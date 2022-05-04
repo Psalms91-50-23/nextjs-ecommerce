@@ -19,7 +19,7 @@ const ProductSlider = ({
                     src={urlFor(image && image[0])} 
                     alt={name} 
                 />
-                <p className="slider-product-name">{name}</p>
+                <p className="slider-product-name">{name.slice(0,20)}</p>
                 <div className="slider-price-container">
                     <p className="slider-product-price">$ {(price).toFixed(2)}</p>
                     <p className="slider-product-discounted-price">$ {(price*discountNum).toFixed(2)}</p>

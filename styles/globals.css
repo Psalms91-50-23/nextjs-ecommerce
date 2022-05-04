@@ -1166,12 +1166,14 @@ span.text-red {
 }
 
 .slider-image-container {
+  display: flex;
   width: 100px;
   height: 100px;
   background-color: rgba(128, 128, 128, 0.8);
   border: 1px solid white;
   border-radius: 5px;
   cursor: pointer;
+  padding: 3px;
 }
 
 .slider-image-container:hover {
@@ -1180,9 +1182,12 @@ span.text-red {
 }
 
 .image-slider-content {
+  display: flex;
+  flex-direction: column;
   position: relative;
   height: 100%;
   width: 100%;
+  padding: 3px;
 }
 
 .slider-discount-container {
@@ -1206,9 +1211,9 @@ span.text-red {
 }
 
 .slider-image {
-  width: 100px;
+  width: 100%;
   height: 80px;
-  box-sizing: border-box;
+  border-radius: 5px;
 }
 
 .slider-off {
@@ -1229,11 +1234,8 @@ span.text-red {
 
 .slider-product-name {
   padding: 2px;
-  flex-direction: row;
   font-size: 8px;
   color: wheat;
-  box-sizing: border-box;
-  overflow-x: hidden;
 }
 
 .maylike-products-wrapper {

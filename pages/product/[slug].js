@@ -156,12 +156,14 @@ const ProductDetails = ({ product, products, bannerData }) => {
                     <div className="marquee">
                         <div className="maylike-products-container track">
                         {products?.map((product) => {
-                            return (
-                            <ProductSlider 
-                                key={product._id} 
-                                product={product} 
-                                discount={discount}
-                            />)
+                            if(product.name !== name ){
+                                return (
+                                <ProductSlider 
+                                    key={product._id} 
+                                    product={product} 
+                                    discount={discount}
+                                />)
+                            }
                         })
                         }
                         </div>
