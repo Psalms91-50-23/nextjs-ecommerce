@@ -34,7 +34,7 @@ export const StateContext = ({ children }) => {
     }
 
     const decreaseCartItemQty = ( cartItemId, cartItemQty ) => {
-        if(cartItemQty >= 1){
+        if(cartItemQty > 1){
             var totalCartQty = 0;
             setCartItems(cartItems.map((item) => {
                 if(item._id === cartItemId){
