@@ -554,7 +554,7 @@ span.text-red {
   width: 100vw;
   float: right;
   top: -4px;
-  right: -5px;
+  right: 0px;
   padding: 40px 10px;
   position: relative;
   transition: all 1s ease-in-out;
@@ -883,7 +883,6 @@ span.text-red {
   flex: 1;
   width: 400px;
   height: 400px;
-  cursor: pointer;
   transition: .3s ease-in-out;
 }
 

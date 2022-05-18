@@ -15,7 +15,6 @@ const ProductDetails = ({ product, products, bannerData }) => {
     const [hover, setHover] = useState(false);
     const [imageIndex, setImageIndex] = useState(0);
     const [sliderProductFiltered, setSliderProductFiltered] = useState(products);
-    // const [filter, setFilter] = useState(false);
     const { 
         decreaseQty, 
         increaseQty, 
@@ -173,7 +172,7 @@ const ProductDetails = ({ product, products, bannerData }) => {
                 </div>
             </div>
         </div>
-  )
+    )
 }
 
 export const getStaticPaths = async () => {
