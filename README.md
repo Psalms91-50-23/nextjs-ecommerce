@@ -19,7 +19,7 @@ This project is a practical demonstration of my learning journey with Next.js. I
 
 ## Test card information
 To simulate payments, use the following test card details in all fields:\
-4242 4242 4242 4242 for all fields on the card, can use any name and email for the card information
+4242 4242 4242 4242 for all fields on the card — for expiry date you can use years that have not yet expired eg 04/27, , can use any name and email for the card information
 
 ## Live link
 https://nextjs-ecommerce-dusky.vercel.app/ 
