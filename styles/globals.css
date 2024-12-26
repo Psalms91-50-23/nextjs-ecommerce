@@ -11,10 +11,6 @@ body, * {
   width: 0px;
 }
 
-/* .home-container {
-  width: 100vw;
-  height: 100vh;
-} */
 
 a {
   color: inherit;
@@ -140,7 +136,6 @@ span.text-red {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  /* gap: 15px; */
   margin-top: 20px;
   width: 100%;
 }
@@ -398,7 +393,6 @@ span.text-red {
   color: white;
   font-size: 9.5em;
   z-index: -3;
-  /* margin-left: -20px; */
   text-transform: uppercase;
 }
 
